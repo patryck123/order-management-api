@@ -1,8 +1,36 @@
-# Order Management API
+# 📦 Order Management API
 
-API REST completa para gerenciamento de pedidos de e-commerce, desenvolvida com **Java 17** e **Spring Boot 3**.
+API REST completa para gerenciamento de pedidos de e-commerce, construída com Java 17 e Spring Boot 3.
 
-## Tecnologias
+## 📋 Sobre o Projeto
+
+Este sistema permite gerenciar pedidos de uma loja virtual. Cada pedido pode conter múltiplos itens, possui status de acompanhamento e é protegido por autenticação JWT. O projeto demonstra uma arquitetura em camadas bem estruturada com Controller → Service → Repository.
+
+## ✨ Funcionalidades
+
+- ✅ Criar pedido com múltiplos itens
+- ✅ Listar todos os pedidos com paginação
+- ✅ Buscar pedido por ID
+- ✅ Atualizar status do pedido (PENDING → CONFIRMED → SHIPPED → DELIVERED → CANCELLED)
+- ✅ Cancelar pedido
+- ✅ Autenticação e autorização com JWT
+- ✅ Cálculo automático do valor total
+- ✅ Validação de dados com Bean Validation
+- ✅ Tratamento global de exceções
+- ✅ Documentação Swagger/OpenAPI
+
+## 🔗 Endpoints
+
+| Método | Rota | Descrição |
+|--------|------|-----------|
+| POST | `/api/auth/login` | Login e geração de token JWT |
+| GET | `/api/orders` | Listar todos os pedidos |
+| GET | `/api/orders/{id}` | Buscar pedido por ID |
+| POST | `/api/orders` | Criar novo pedido |
+| PUT | `/api/orders/{id}/status` | Atualizar status do pedido |
+| DELETE | `/api/orders/{id}` | Cancelar pedido |
+
+## 🛠️ Tecnologias
 
 - Java 17
 - Spring Boot 3.2
@@ -10,64 +38,32 @@ API REST completa para gerenciamento de pedidos de e-commerce, desenvolvida com 
 - Spring Data JPA / Hibernate
 - PostgreSQL
 - Maven
-- Docker / Docker Compose
+- Docker & Docker Compose
 - Swagger / OpenAPI 3
+- Lombok
+- Bean Validation
 
-## Funcionalidades
-
-- Criar, listar, buscar e cancelar pedidos
-- Autenticação e autorização via JWT
-- Validação de dados com Bean Validation
-- Tratamento centralizado de exceções
-- Documentação automática com Swagger UI
-- Containerização com Docker
-
-## Como Executar
-
-### Com Docker (recomendado)
+## ▶️ Como Executar
 
 ```bash
-docker-compose up --build
+# Subir o banco de dados
+docker-compose up -d
+
+# Executar a aplicação
+./mvnw spring-boot:run
 ```
 
-Acesse: http://localhost:8080/swagger-ui.html
+Acesse a documentação Swagger em: `http://localhost:8080/swagger-ui.html`
 
-### Localmente
-
-1. Certifique-se de ter o PostgreSQL rodando na porta 5432
-2. Crie o banco `order_db`
-3. Configure `application.properties` com suas credenciais
-
-```bash
-mvn spring-boot:run
-```
-
-## Endpoints
-
-| Método | Rota | Descrição |
-|--------|------|-----------|
-| POST | `/api/orders` | Criar novo pedido |
-| GET | `/api/orders` | Listar todos os pedidos |
-| GET | `/api/orders/{id}` | Buscar pedido por ID |
-| GET | `/api/orders/customer?email=` | Pedidos por e-mail |
-| PATCH | `/api/orders/{id}/status` | Atualizar status |
-| DELETE | `/api/orders/{id}` | Cancelar pedido |
-
-## Estrutura do Projeto
+## 📂 Estrutura do Projeto
 
 ```
 src/main/java/com/patryck/orders/
-├── controller/   # Endpoints REST
-├── service/      # Regras de negócio
-├── repository/   # Acesso ao banco
-├── entity/       # Entidades JPA
-├── dto/          # Data Transfer Objects
-├── security/     # JWT e configuração Spring Security
-└── exception/    # Tratamento de erros
+├── controller/     # Endpoints REST
+├── service/        # Regras de negócio
+├── repository/     # Acesso ao banco de dados
+├── entity/         # Entidades JPA (Order, OrderItem)
+├── dto/            # Objetos de transferência de dados
+├── security/       # Configuração JWT e Spring Security
+└── exception/      # Tratamento global de erros
 ```
-
-## Autor
-
-**Patryck Martins Langsdorff** — Desenvolvedor Java Back End Junior
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-patryck--martins--langsdorff-blue)](https://www.linkedin.com/in/patryck-martins-langsdorff)
